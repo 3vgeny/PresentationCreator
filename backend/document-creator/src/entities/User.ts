@@ -4,10 +4,12 @@ import {
   DeleteDateColumn, 
   Entity, 
   PrimaryGeneratedColumn,
+  Unique,
   UpdateDateColumn, 
 } from 'typeorm';
 
 @Entity()
+@Unique(['login'])
 export class User {
   @PrimaryGeneratedColumn()
     id: number;
@@ -29,6 +31,9 @@ export class User {
 
   @Column({ nullable: true })
     lastSignIn: Date;
+
+  @Column({ type: 'varchar', nullable: true })
+    hashRefreshToken: string | null;
 
   @CreateDateColumn()
     createdAt: Date;
